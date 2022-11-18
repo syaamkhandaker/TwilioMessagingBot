@@ -45,16 +45,16 @@ public class CompanySMSWebhookHandler {
 
 	private UserRequest userRequest;
 
-	private static final String endpoint = "dynamodb.us-east-2.amazonaws.com";
-	private static final String accessKey = "AKIAUFHDV5GBNYWFDPO7";
-	private static final String privateKey = "2vHUqJhPDduAt5QdKAdiLTY3AGlFUEpkDyuJezPH";
-	public static final String accountSid = "ACb80a5699bbcf32c554a17698071dc8c1";
-	public static final String authToken = "5da29f9724c483857a32e1cbecbff52e";
-	public static final String myNumber = "+19134122893";
-	public static final String fordNumber = "+14048587064";
+	private static final String endpoint = "";
+	private static final String accessKey = "";
+	private static final String privateKey = "";
+	public static final String accountSid = "";
+	public static final String authToken = "";
+	public static final String myNumber = "";
+	public static final String fordNumber = "";
 
 	private AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-			.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, "us-east-2"))
+			.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, "sample-region"))
 			.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, privateKey))).build();
 	private DynamoDB dynamo = new DynamoDB(client);
 
