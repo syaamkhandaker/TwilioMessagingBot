@@ -11,16 +11,16 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 
 @Configuration
 public class DynamoDBConfiguration {
-        private static final String endpoint="dynamodb.us-east-2.amazonaws.com";
-        private static final String accessKey = "AKIAUFHDV5GBNYWFDPO7";
-        private static final String privateKey = "2vHUqJhPDduAt5QdKAdiLTY3AGlFUEpkDyuJezPH";
+        private static final String endpoint="endpoint";
+        private static final String accessKey = "accessKey;
+        private static final String privateKey = "privateKey";
 
         @Bean
         public DynamoDBMapper dynamoDBMapper(){
         return new DynamoDBMapper(AmazonDynamoDBClientBuilder.standard()
         .withEndpointConfiguration(
                 new AwsClientBuilder.EndpointConfiguration(
-                        endpoint,"us-east-2")
+                        endpoint,"sample-region")
         )
         .withCredentials(new AWSStaticCredentialsProvider(
         new BasicAWSCredentials(accessKey,privateKey))).build());
