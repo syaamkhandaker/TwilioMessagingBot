@@ -12,7 +12,7 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
 @Configuration
 public class DynamoDBConfiguration {
         private static final String endpoint="endpoint";
-        private static final String accessKey = "accessKey;
+        private static final String accessKey = "accessKey";
         private static final String privateKey = "privateKey";
 
         @Bean
