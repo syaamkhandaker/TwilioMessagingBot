@@ -9,3 +9,10 @@ Thymeleaf alongside an H2 in-memory database to be able to create a deletion/app
 Intially, our product was going to allow users to request for services themselves, so this feature would allow us to verify their request and for
 improved security. However, due to our recent pivot towards micro-internship opportunities, the team provides the requests themselves. The website is
 now used as a verification system for us to see if the request is going through properly before we send it out to our 100+ users.
+
+Technologies Used:
+
+Backend: Java Spring Boot
+Database: AWS DynamoDB, H2
+Frontend: HTML, CSS/Bootstrap
+Other: AWS EC2, Spring Thymeleaf
