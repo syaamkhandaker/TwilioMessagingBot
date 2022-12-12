@@ -13,6 +13,9 @@ now used as a verification system for us to see if the request is going through 
 Technologies Used:
 
 Backend: Java Spring Boot
+
 Database: AWS DynamoDB, H2
+
 Frontend: HTML, CSS/Bootstrap
+
 Other: AWS EC2, Spring Thymeleaf
