@@ -55,13 +55,12 @@ public class ProviderSMSWebhookHandler {
 	@Autowired
 	private UserRepo userRepo;
 
-	private static final String endpoint = "dynamodb.us-east-2.amazonaws.com";
-	private static final String accessKey = "AKIAUFHDV5GBPXHTB45A";
-	private static final String privateKey = "jCmx0h5LXGbKcrj1OkHfteB9wG+PQLmC4nWO3TvE";
-	public static final String accountSid = "ACb80a5699bbcf32c554a17698071dc8c1";
-	public static final String authToken = "c2f7a5c6c687375951e3922e531a3a75";
-	public static final String myNumber = "+19134122893";
-	public static final String fordNumber = "+14048587064";
+	private static final String endpoint = "";
+	private static final String accessKey = "";
+	private static final String privateKey = "";
+	public static final String accountSid = "";
+	public static final String authToken = "";
+	public static final String myNumber = "";
 
 	private static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
 			.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, "us-east-2"))
