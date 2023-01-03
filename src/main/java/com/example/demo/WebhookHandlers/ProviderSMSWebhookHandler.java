@@ -55,15 +55,16 @@ public class ProviderSMSWebhookHandler {
 	@Autowired
 	private UserRepo userRepo;
 
-	private static final String endpoint = "";
-	private static final String accessKey = "";
-	private static final String privateKey = "";
-	public static final String accountSid = "";
-	public static final String authToken = "";
-	public static final String myNumber = "";
+	private static final String endpoint = "dynamodb.us-east-2.amazonaws.com";
+	private static final String accessKey = "AKIAUFHDV5GBPXHTB45A";
+	private static final String privateKey = "jCmx0h5LXGbKcrj1OkHfteB9wG+PQLmC4nWO3TvE";
+	public static final String accountSid = "ACb80a5699bbcf32c554a17698071dc8c1";
+	public static final String authToken = "c2f7a5c6c687375951e3922e531a3a75";
+	public static final String myNumber = "+19134122893";
+	public static final String fordNumber = "+14048587064";
 
 	private static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-			.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, "sample-region"))
+			.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, "us-east-2"))
 			.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, privateKey))).build();
 	private static DynamoDB dynamo = new DynamoDB(client);
 
@@ -201,7 +202,7 @@ public class ProviderSMSWebhookHandler {
 						String number = dbValues.get("phoneNumber").getS();
 						Message message = Message.creator(new PhoneNumber(number), new PhoneNumber(myNumber), text)
 								.create();
-						break end;
+						continue end;
 					}
 
 				}
@@ -230,15 +231,11 @@ public class ProviderSMSWebhookHandler {
 	public void handleIncomingMessage(@RequestParam("Body") String body,
 			@RequestParam("ProviderName") String providerName,
 			@RequestParam("ProviderNumber") String providerPhoneNumber) throws NoSuchAlgorithmException {
-		String userPhoneNumber = "";
 		ScanRequest userScan = new ScanRequest().withTableName("Users");
 		ScanResult users = client.scan(userScan);
 		boolean test = false;
-		end: for (Map<String, AttributeValue> dbValues : users.getItems()) {// whole for loop just looks through the
-																			// entire DynamoDB Users DB to check if the
-																			// user's name is in there
+		end: for (Map<String, AttributeValue> dbValues : users.getItems()) {
 			if (dbValues.get("userName").getS().trim().equals(body.trim())) {
-				userPhoneNumber = dbValues.get("phoneNumber").getS();
 				test = true;
 				break end;
 			}
@@ -249,7 +246,7 @@ public class ProviderSMSWebhookHandler {
 					"Your offer has been sent to " + body + ".\nThey will message you if they choose to accept.")
 					.create();
 			String provName = providerName.split(" ").length > 1 ? providerName.split(" ")[0] : providerName;
-			Message m = Message.creator(new PhoneNumber(userPhoneNumber), new PhoneNumber(myNumber),
+			Message m = Message.creator(new PhoneNumber(fordNumber), new PhoneNumber(myNumber),
 					provName + " wants to fulfill " + body + "'s gig. Their number is " + providerPhoneNumber
 							+ "\nSend them a message to begin the gig.")
 					.create();
@@ -277,5 +274,10 @@ public class ProviderSMSWebhookHandler {
 			Message message = Message.creator(new PhoneNumber(number), new PhoneNumber(myNumber), text).create();
 		}
 
+	}	@RequestMapping(value="/getStarted")
+	public void addToDatabaseAndStart(@RequestParam("Name") String name, @RequestParam("Number") String phoneNumber) {
+		Twilio.init(accountSid, authToken);
+		String text = "Hi " + name + ", Welcome to Gigsurf!\n\nPlease send START to get started.";
+		Message message = Message.creator(new PhoneNumber(phoneNumber), new PhoneNumber(myNumber), text).create();
 	}
 }
