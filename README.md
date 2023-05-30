@@ -19,3 +19,5 @@ Database: AWS DynamoDB, H2
 Frontend: HTML, CSS/Bootstrap
 
 Other: AWS EC2, Spring Thymeleaf
+
+Note: This version if severly outdated and only serves as a purpose to show a glimpse of the type of the interactions I am doing with Twilio/AWS.
