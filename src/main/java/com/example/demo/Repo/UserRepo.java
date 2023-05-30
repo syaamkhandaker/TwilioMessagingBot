@@ -38,7 +38,7 @@ public class UserRepo{
 
     public String update(String userId, User user) {
         dynamoDBMapper.save(user, new DynamoDBSaveExpression()
-        .withExpectedEntry("userId", new ExpectedAttributeValue(
+        .withExpectedEntry("primaryKey", new ExpectedAttributeValue(
             new AttributeValue().withS(userId)
         )));
         
