@@ -63,7 +63,7 @@ public class ProviderSMSWebhookHandler {
 	public static final String myNumber = "";
 
 	private static AmazonDynamoDB client = AmazonDynamoDBClientBuilder.standard()
-			.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, "us-east-2"))
+			.withEndpointConfiguration(new AwsClientBuilder.EndpointConfiguration(endpoint, "sample-region"))
 			.withCredentials(new AWSStaticCredentialsProvider(new BasicAWSCredentials(accessKey, privateKey))).build();
 	private static DynamoDB dynamo = new DynamoDB(client);
 
