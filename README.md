@@ -1,5 +1,7 @@
 # TwilioMessagingBot
 
+Note: This version if severly outdated and only serves as a purpose to show a glimpse of the type of the interactions I am doing with Twilio/AWS.
+
 Hello! This is the code I used to build a Twilio Messaging Bot I made for Gigsurf. The Controller classes I built with Java Spring Boot create REST APIs
 that I use to interact with Twilio Studio and AWS DynamoDB. I host all of this code on an AWS EC2 instance to make it a publicly available website
 I can access without having to keep it running on my computer. 
@@ -19,5 +21,3 @@ Database: AWS DynamoDB, H2
 Frontend: HTML, CSS/Bootstrap
 
 Other: AWS EC2, Spring Thymeleaf
-
-Note: This version if severly outdated and only serves as a purpose to show a glimpse of the type of the interactions I am doing with Twilio/AWS.
