@@ -88,7 +88,7 @@ public class ProviderSMSWebhookHandler {
 		Provider provider = new Provider(body.trim(), name.trim(), number.trim());
 		AllProviders allProvider = new AllProviders(body.trim(), name.trim(), number.trim());
 		Table table = dynamo.getTable("Providers");
-		GetItemSpec item = new GetItemSpec().withPrimaryKey("providerId", provider.getProviderId());
+		GetItemSpec item = new GetItemSpec().withPrimaryKey("primaryKey", provider.getProviderId());
 		Item t = table.getItem(item);
 		if (!Objects.nonNull(t)) {
 			repo.save(provider);
@@ -121,12 +121,12 @@ public class ProviderSMSWebhookHandler {
 		mes.update(str.getBytes());
 		String providerId = DatatypeConverter.printHexBinary(mes.digest());
 
-		Table table = dynamo.getTable("Providers");
-		GetItemSpec item = new GetItemSpec().withPrimaryKey("providerId", providerId);
+		Table table = dynamo.getTable("DB");
+		GetItemSpec item = new GetItemSpec().withPrimaryKey("primaryKey", providerId);
 		Item t = table.getItem(item);
 
 		if ((!Objects.nonNull(t))) {
-			ScanRequest pastUserRequestScanRequest = new ScanRequest().withTableName("PastUserRequest");
+			ScanRequest pastUserRequestScanRequest = new ScanRequest().withTableName("DB1");
 			ScanResult pastUserRequestScan = client.scan(pastUserRequestScanRequest);
 			end: for (Map<String, AttributeValue> dbValues : pastUserRequestScan.getItems()) {
 				String pastUserRequestTypes = dbValues.get("User").getM().get("type").getN() == null
@@ -185,7 +185,7 @@ public class ProviderSMSWebhookHandler {
 		table.deleteItem("requestId", userRequest.getRequestId());
 		pastRepo.save(pastUserRequest);
 
-		ScanRequest providerScan = new ScanRequest().withTableName("Providers");
+		ScanRequest providerScan = new ScanRequest().withTableName("DB3");
 		ScanResult providers = client.scan(providerScan);
 
 		end: for (Map<String, AttributeValue> dbValues : providers.getItems()) {
